@@ -28,7 +28,7 @@ S_hat = sqrt(W(1:3, 1:3)) * V(:, 1:3)';
 % Solve for affine ambiguity
 % What is A? Then use it in L0   
 A  = M_hat;
-L0 = inv(A' * A);
+L0 = pinv(A' * A);
 
 % Save Mhat for myfun
 save('M_hat', 'M_hat')

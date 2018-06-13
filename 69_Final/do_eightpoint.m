@@ -51,8 +51,12 @@ end
 
 [matches, ~] = vl_ubcmatch(desc1, desc2, match_threshold);
 
-% Only keep matches in centre of image (which contains the castle)
+% All matches
+disp(['matches: ' num2str(size(matches, 2))])
+
+% Only keep matches in center of image (which contains the castle)
 new_matches = [];
+
 for m = 1:size(matches, 2)
     
     if (x1(:,matches(1,m)) > 885) && (x1(:,matches(1,m)) < 3286) && (y1(:,matches(1,m)) > 726) && (y1(:,matches(1,m)) < 1906)
@@ -63,10 +67,14 @@ for m = 1:size(matches, 2)
     
 end
 
+% Display the number of matches on the castle
+disp(['castle matches: ' num2str(size(new_matches, 2)) '\n'])
+
+inliers_match_idx = new_matches;
 
 %% Perform the 8-point algorithm
 
-[F_ransac_denorm, inliers_1, inliers_2, inliers_match_idx] = eightpoint(x1, y1, x2, y2, new_matches, dist_threshold);
+[F_ransac_denorm, inliers_1, inliers_2, ~] = eightpoint(x1, y1, x2, y2, new_matches, dist_threshold);
 
 
 end

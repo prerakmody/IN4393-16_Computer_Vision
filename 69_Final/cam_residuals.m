@@ -18,7 +18,7 @@ residuals = zeros(size(M_hat, 1) / 2, 4);
 % Compute the residuals
 for i = 1:size(M_hat, 1) / 2
     
-    A_i = M_hat(i * 2 - 1:i * 2, :);
+    A_i = M_hat(i*2-1:i*2, :);
     D = A_i * L * A_i' - eye(2);
     residuals(i, :) = D(:);
     

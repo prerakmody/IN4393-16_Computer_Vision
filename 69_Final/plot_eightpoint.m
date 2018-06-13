@@ -25,7 +25,7 @@ imshow(I1)
 title('Inliers and Epipolar Lines in First Image RANSAC'); hold on;
 plot(p1(:, 1), p1(:, 2), 'go');
 
-lines1 = epipolarLine(F_ransac_denorm', p2); %Ax+By+C
+lines1 = epipolarLine(F_ransac_denorm', p2'); %Ax+By+C
 epipoint1 = lineToBorderPoints(lines1, size(I1));
 line(epipoint1(:, [1, 3])', epipoint1(:, [2, 4])');
 
@@ -34,13 +34,15 @@ imshow(I2)
 title('Epipolar lines in second image RANSAC'); hold on; 
 plot(p2(:, 1), p2(:, 2), 'go');
 
-lines2 = epipolarLine(F_ransac_denorm, p1);
+lines2 = epipolarLine(F_ransac_denorm, p1');
 epipoint2 = lineToBorderPoints(lines2, size(I2));
 line(epipoint2(:, [1,3])', epipoint2(:, [2,4])');
 truesize;
 
 %% Plotting of matching features
 p2(1, :) = p2(1, :) + 4064;
+
+figure;
 
 imshow([I1 I2]);
 hold on
